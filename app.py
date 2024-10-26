@@ -107,7 +107,14 @@ st.markdown("<h3 style='text-align: center; color: violet;'>AI Baydin ♈ ♉ �
 col1, col2 = st.columns([2, 3])
 
 with col1:
-    
+    t.markdown(
+    f"""
+    <div style='text-align: center;padding-bottom: 100px;'>
+        
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
     d = st.date_input(
         "မွေးနေ့ ရွေးချယ်ပါ",
         datetime.date(1990, 1, 1),
@@ -578,6 +585,14 @@ with col2:
     with st.expander(" ",expanded=True):        
     #st.write("  ")
 #with col3:
+        st.markdown(
+    f"""
+    <div style='text-align: center;padding-bottom: 50px;'>
+        <span style='color: yellow;font-size:19px;'>တွက်ချက်မှုရလဒ်</span>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
         st.markdown(f"<span style='color:yellow; font-size:17px;'>အဆိုပြု လုပ်ငန်းအမည် :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:white;font-size:15px;'>{output_name}</span>", unsafe_allow_html=True)
         st.markdown(f"<span style='color:violet; font-size:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---- {seven_days[int(json_data['start_num'])]}နံ နှင့်စပြီး {seven_days[int(json_data['end_num'])]}နံ နှင့်ဆုံးသော လုပ်ငန်း အမည်ကိုပေးပါ။ ----</span>", unsafe_allow_html=True)
         st.markdown(f"<span style='color:yellow; font-size:17px;'>ကံကောင်းစေသော အရောင် :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:white;font-size:15px;'>{json_data['luck_color']}</span>", unsafe_allow_html=True)
