@@ -2,6 +2,47 @@ import datetime
 import streamlit as st # type: ignore
 import base64
 import pandas as pd
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from v2astronamewithramdomforest import read_business_names, find_consonants
+
+# Load business names
+name_df = read_business_names('./ai-baydin-name-generator/resources/Burmese Bussiness Name - Sheet1.csv')
+
+# Remove \n in Name column (this is redundant in this case since it's handled in the read function)
+# name_df['Name'] = name_df['Name'].replace('\n','')
+
+# Burmese consonants grouped by days of the week
+day_to_consonants = {
+    1: ['အ', 'ဥ', 'ဧ'],  # Sunday
+    2: ['က', 'ခ', 'ဂ', 'ဃ', 'င'],  # Monday
+    3: ['စ', 'ဆ', 'ဇ', 'ဈ', 'ည'],  # Tuesday
+    4: ['ယ', 'ရ', 'လ', 'ဝ'],  # Wednesday
+    5: ['ပ', 'ဖ', 'ဗ', 'ဘ', 'မ'],  # Thursday
+    6: ['ဟ', 'သ'],  # Friday
+    7: ['တ', 'ထ', 'ဒ', 'ဓ', 'န'],  # Saturday
+}
+
+# Flatten the dictionary for easy lookup of consonant-to-day mapping
+consonant_to_day = {consonant: day for day, consonants in day_to_consonants.items() for consonant in consonants}
+
+# Apply the function to each name and create new columns
+name_df[['First Consonant', 'Last Consonant']] = name_df['Name'].apply(lambda x: pd.Series(find_consonants(x, consonant_to_day)))
+
+# Reorder columns
+name_df = name_df[['First Consonant', 'Last Consonant', 'Name']]
+
+# Shuffle data
+shuffle_data = name_df.sample(frac=1)
+
+# Modeling
+X = shuffle_data[['First Consonant', 'Last Consonant']]
+Y = shuffle_data['Name']
+
+# Initialize and train Random Forest Classifier
+clf = RandomForestClassifier(n_estimators=100, random_state=42)
+clf.fit(X, Y)
+
 
 st.set_page_config(layout="wide")
 
@@ -12,7 +53,7 @@ def get_base64_image(file_path):
     return encoded
 
 # Path to your local image file
-image_path = "./resources/img/bg-1.jpg"
+image_path = "./ai-baydin-name-generator/resources/img/bg-1.jpg"
 img_base64 = get_base64_image(image_path)
 st.markdown(
     f"""
@@ -396,14 +437,6 @@ with col1:
     st.write("မွေးနှစ် အကြွင်း :", birth_number)
     #st.write("MM year:", mmyear)
 
-
-# To load the model
-import joblib
-import numpy as np
-import pandas as pd
-
-loaded_model = joblib.load('./resources/Astro_random_forest_model.h5')
-
 # Function to take a single input and get predictions based on how many times it appears in the dataset
 def test_with_same_input_duplicate_outputs(start_input, end_input):
     # Convert user input to a DataFrame
@@ -424,11 +457,11 @@ def test_with_same_input_duplicate_outputs(start_input, end_input):
 
 
     # Get predicted probabilities for each class
-    probabilities = loaded_model.predict_proba(input_combined)
+    probabilities = clf.predict_proba(input_combined)
 
     # Randomly select predictions based on probabilities without duplication
     # First, limit the size to the number of available unique classes to avoid over-selecting
-    unique_classes = np.unique(loaded_model.classes_)
+    unique_classes = np.unique(clf.classes_)
     selection_size = min(duplicate_count, len(unique_classes))
 
     # Choose 'selection_size' number of unique predictions
@@ -522,7 +555,7 @@ if isinstance(predicted_labels, str):
 else:
     for i, label in enumerate(predicted_labels):
         # Load the Bussiness type data
-        file_path = './resources/Astro - B-type.csv'
+        file_path = './ai-baydin-name-generator/resources/Astro - B-type.csv'
         b_type_data = pd.read_csv(file_path)
         
         # Find the row index where the value  is in Column
