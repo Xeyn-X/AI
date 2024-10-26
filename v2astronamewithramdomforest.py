@@ -18,7 +18,7 @@ def find_consonants(name, consonant_to_day):
     if name_characters[-1] == '်':
         last_consonant = consonant_to_day[consonants[-2]] if len(consonants) > 0 else None
     elif name_characters[-2] == '်':
-        last_consonant = consonant_to_day[consonants[-3]] if len(consonants) > 0 else None
+        last_consonant = consonant_to_day[consonants[-2]] if len(consonants) > 0 else None
     else:
         last_consonant = consonant_to_day[consonants[-1]] if len(consonants) > 0 else None
 
