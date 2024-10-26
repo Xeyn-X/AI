@@ -12,7 +12,7 @@ def get_base64_image(file_path):
     return encoded
 
 # Path to your local image file
-image_path = "./ai-baydin-name-generator/resources/img/bg-1.jpg"
+image_path = "./resources/img/bg-1.jpg"
 img_base64 = get_base64_image(image_path)
 st.markdown(
     f"""
@@ -402,7 +402,7 @@ import joblib
 import numpy as np
 import pandas as pd
 
-loaded_model = joblib.load('./ai-baydin-name-generator/resources/Astro_random_forest_model.h5')
+loaded_model = joblib.load('./resources/Astro_random_forest_model.h5')
 
 # Function to take a single input and get predictions based on how many times it appears in the dataset
 def test_with_same_input_duplicate_outputs(start_input, end_input):
@@ -522,7 +522,7 @@ if isinstance(predicted_labels, str):
 else:
     for i, label in enumerate(predicted_labels):
         # Load the Bussiness type data
-        file_path = './ai-baydin-name-generator/resources/Astro - B-type.csv'
+        file_path = './resources/Astro - B-type.csv'
         b_type_data = pd.read_csv(file_path)
         
         # Find the row index where the value  is in Column
