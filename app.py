@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from v2astronamewithramdomforest import read_business_names, find_consonants
 
 # Load business names
-name_df = read_business_names('./ai-baydin-name-generator/resources/Burmese Bussiness Name - Sheet1.csv')
+name_df = read_business_names('./resources/Burmese Bussiness Name - Sheet1.csv')
 
 # Remove \n in Name column (this is redundant in this case since it's handled in the read function)
 # name_df['Name'] = name_df['Name'].replace('\n','')
@@ -473,7 +473,7 @@ def test_with_same_input_duplicate_outputs(start_input, end_input):
 import json
 
 # Path to the uploaded JSON file
-file_path = './ai-baydin-name-generator/resources/astro.json'
+file_path = './resources/astro.json'
 
 # Open and read the JSON file
 with open(file_path, 'r', encoding='utf-8') as file:
@@ -555,7 +555,7 @@ if isinstance(predicted_labels, str):
 else:
     for i, label in enumerate(predicted_labels):
         # Load the Bussiness type data
-        file_path = './ai-baydin-name-generator/resources/Astro - B-type.csv'
+        file_path = './resources/Astro - B-type.csv'
         b_type_data = pd.read_csv(file_path)
         
         # Find the row index where the value  is in Column
