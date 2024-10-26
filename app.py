@@ -107,7 +107,7 @@ st.markdown("<h3 style='text-align: center; color: violet;'>AI Baydin ♈ ♉ �
 col1, col2 = st.columns([2, 3])
 
 with col1:
-    t.markdown(
+    st.markdown(
     f"""
     <div style='text-align: center;padding-bottom: 100px;'>
         
