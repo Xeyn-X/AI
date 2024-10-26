@@ -443,7 +443,9 @@ def test_with_same_input_duplicate_outputs(start_input, end_input):
     input_data = pd.DataFrame({'First Consonant': [start_input], 'Last Consonant': [end_input]})
 
     # Count how many times this input appears in the original dataset
-    duplicate_count = 11
+    duplicate_count = len(name_df[(name_df['First Consonant'] == start_input) & (name_df['Last Consonant'] == end_input)])
+
+    max_count = min(duplicate_count, 11)
 
     
 
@@ -462,7 +464,7 @@ def test_with_same_input_duplicate_outputs(start_input, end_input):
     # Randomly select predictions based on probabilities without duplication
     # First, limit the size to the number of available unique classes to avoid over-selecting
     unique_classes = np.unique(clf.classes_)
-    selection_size = min(duplicate_count, len(unique_classes))
+    selection_size = min(max_count, len(unique_classes))
 
     # Choose 'selection_size' number of unique predictions
     top_predictions = np.random.choice(unique_classes, size=selection_size, p=probabilities[0], replace=False)
