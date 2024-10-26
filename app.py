@@ -578,8 +578,8 @@ with col2:
     with st.expander(" ",expanded=True):        
     #st.write("  ")
 #with col3:
-        st.write("အဆိုပြု လုပ်ငန်းအမည် : ",output_name)
-        st.write(seven_days[int(json_data['start_num'])],"နံ နှင့်စပြီး",seven_days[int(json_data['end_num'])],"နံ နှင့်ဆုံးသော လုပ်ငန်း အမည်ကိုပေးပါ။")
-        st.write("ကံကောင်းစေသော အရောင် : ",json_data['luck_color'])
-        st.write("မင်္ဂလာ အချိန် : ",json_data['luck_time'])
-        st.write("ဆောင်ရန်၊ ရှောင်ရန် : ",json_data['instruction'])
+        st.markdown(f"<span style='color:yellow; font-size:17px;'>အဆိုပြု လုပ်ငန်းအမည် :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:white;font-size:16px;'>{output_name}:</span>", unsafe_allow_html=True)
+        st.markdown(f"<span style='color:yellow; font-size:16px;'>&nbsp;&nbsp;&nbsp;----{seven_days[int(json_data['start_num'])]} နံ နှင့်စပြီး {seven_days[int(json_data['end_num'])]} နံ နှင့်ဆုံးသော လုပ်ငန်း အမည်ကိုပေးပါ။----</span>", unsafe_allow_html=True)
+        st.markdown(f"<span style='color:yellow; font-size:17px;'>ကံကောင်းစေသော အရောင် :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:white;font-size:16px;'>{json_data['luck_color']}:</span>", unsafe_allow_html=True)
+        st.markdown(f"<span style='color:yellow; font-size:17px;'>မင်္ဂလာ အချိန် :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:white;font-size:16px;'>{json_data['luck_time']}:</span>", unsafe_allow_html=True)
+        st.markdown(f"<span style='color:yellow; font-size:17px;'>ဆောင်ရန်၊ ရှောင်ရန် :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:white;font-size:16px;'>{json_data['instruction']}:</span>", unsafe_allow_html=True)
