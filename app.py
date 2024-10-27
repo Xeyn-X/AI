@@ -597,6 +597,8 @@ with col1:
             """, 
             unsafe_allow_html=True
         )
+                with st.spinner('တွက်ချက်နေသည်...'): 
+                    time.sleep(5)
                 st.markdown(f"<span style='color:#fef566; font-size:17px;'>အဆိုပြု လုပ်ငန်းအမည် :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:white;font-size:15px;'>{output_name}</span>", unsafe_allow_html=True)
                 st.markdown(f"""<div style='text-align: center; padding-bottom: 30px'><span style='color:violet; font-size:16px;'>---- {seven_days[int(json_data['start_num'])]}နံ နှင့်စပြီး {seven_days[int(json_data['end_num'])]}နံ နှင့်ဆုံးသော လုပ်ငန်း အမည်ကိုပေးပါ။ ----</span></div>""", unsafe_allow_html=True)
                 st.markdown(f"<span style='color:#fef566; font-size:17px;'>ကံကောင်းစေသော အရောင် :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:white;font-size:15px;'>{json_data['luck_color']}</span>", unsafe_allow_html=True)
