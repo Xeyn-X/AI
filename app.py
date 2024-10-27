@@ -570,8 +570,16 @@ else:
         # Find the row index where the value  is in Column
         row_index = b_type_data.loc[b_type_data['Name'] == label].index
         
-        # Select value from the second column of a specific row
-        value = b_type_data.loc[row_index, 'Invalid'].values[0]
+        # Check if there is any data in the filtered DataFrame before accessing .values[0]
+        filtered_data = b_type_data.loc[row_index, 'Invalid']
+        
+        # Only access the value if the filtered data is not empty
+        if not filtered_data.empty:
+            value = filtered_data.values[0]
+        else:
+            # Handle the case where filtered_data is empty, maybe set a default value or raise a custom error
+            value = None  # or some default value, or raise an exception
+        
         list_values =  [int(x) for x in value.split(',')]
         # Check if  exists in the list
         if b_type_key_int not in list_values:
