@@ -1,6 +1,7 @@
 import datetime
 import streamlit as st # type: ignore
 import base64
+import time
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
