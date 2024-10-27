@@ -565,8 +565,12 @@ else:
     for i, label in enumerate(predicted_labels):
         # Load the Bussiness type data
         file_path = './resources/Astro - B-type.csv'
-        b_type_data = pd.read_csv(file_path)
+        df = pd.read_csv(file_path)
+        # Creating an empty DataFrame with the same columns as the CSV file
+        b_type_data = pd.DataFrame(columns=df.columns)
         
+        # Adding data from the CSV file into the new DataFrame
+        b_type_data = b_type_data.append(df, ignore_index=True)
         # Find the row index where the value  is in Column
         row_index = b_type_data.loc[b_type_data['Name'] == label].index
         
